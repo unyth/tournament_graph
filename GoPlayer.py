@@ -134,5 +134,9 @@ class PlayerTest(unittest.TestCase):
         self.assertFalse(eval(repr(self.player_list[0])) is
                          self.player_list[0])
 
+    def test_sorting(self):
+        sorted_player_list = sorted(self.player_list)
+        self.assertTrue(sorted_player_list[3] == self.player_list[4])
+
 if __name__ == "__main__":
     unittest.main()
