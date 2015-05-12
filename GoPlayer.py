@@ -23,16 +23,6 @@ class Player(object):
         self.id_num = aga_id
         self.rating = aga_rating
 
-    def participates(self, tournament_name="Test Tournament"):
-        """Assign a tournament for the player when they participates"""
-
-        self.tournament = tournament_name
-
-    def plays_division(self, division_id="Test Division"):
-        """Assign a division for the player to play in"""
-
-        self.division = division_id
-
     def __str__(self):
         return ("<Player: %s, AGA ID: %i, AGA rating: %f>"
                 % (self.name, self.id_num, self.rating))
@@ -110,22 +100,6 @@ class PlayerTest(unittest.TestCase):
         player_set = set(self.player_list)
         self.assertIsInstance(player_set, set)
         self.assertEqual(len(player_set), 4)
-
-    def test_tournament_participation(self):
-        """Test to see if tournament can be assigned"""
-
-        for player in self.player_list:
-            player.participates("Go Congress")
-
-        self.assertTrue(self.player_list[0].tournament == "Go Congress")
-
-    def test_division_assignment(self):
-        """Test to see if division can be assigned"""
-
-        for player in self.player_list:
-            player.plays_division("open")
-
-        self.assertTrue(self.player_list[1].division == "open")
 
     def test_proper_repr(self):
         """Test to see if __repr__ returns a proper python expression"""
