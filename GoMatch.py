@@ -20,6 +20,7 @@ The game is assumed to be played in U.S., and under AGA ruling.
 
 from fake_player_data import player_list
 from random import choice
+from copy import copy
 
 from GoPlayer import Player
 import unittest
@@ -85,7 +86,10 @@ class Match(object):
 
         self.result = result
 
-
+    def __eq__(self, other):
+        return (self.w_player == other.w_player and 
+                self.b_player == other.b_player and
+                self.match_type == other.match_type)
 
 class MatchTestCase(unittest.TestCase):
 
@@ -125,6 +129,10 @@ class MatchTestCase(unittest.TestCase):
         with self.assertRaises(AlteringResultErrorion):
             self.match.update_result(another_result)
 
+    def test_equality(self):
+        self.match1 = Match(player_list[8], player_list[9])
+        self.match2 = copy(self.match1)
+        self.assertTrue(self.match1 == self.match2)
 
 if __name__ == "__main__":
     unittest.main()
