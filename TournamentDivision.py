@@ -35,7 +35,36 @@ G = nx.Graph()
 
 G.add_nodes_from(player_list)
 
-class Division(object)
+class Division(object):
+    """Division Class
+
+    It holds all the players in the division, and all the possible
+    matches that has been played by players of this division and can be
+    played by players of this division
+    """
+
+    def __init__(self, player_list={}):
+        self.players= nx.Graph()
+        self.possible_matches = nx.Graph()
+        self.played_matches = nx.Graph()
+
+        if player_list:
+            if player_list % 2 == 1:
+                """Add a player to represent a "by"
+
+                Since there is an odd number of players, go is played
+                between 2 people.
+                """
+
+                player_list.append(Player())
+
+            self.players.add_nodes_from(player_list):
+            
+            for player in self.players:
+                for other_player in self.players:
+                    if player != other_player:
+                        self.possible_matches.add_edge(player,
+                                                       other_player)
 
 ########################################################################
 
