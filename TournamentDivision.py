@@ -43,13 +43,13 @@ class Division(object):
     played by players of this division
     """
 
-    def __init__(self, player_list={}):
+    def __init__(self, player_list=[]):
         self.players= nx.Graph()
         self.possible_matches = nx.Graph()
         self.played_matches = nx.Graph()
 
         if player_list:
-            if player_list % 2 == 1:
+            if len(player_list) % 2 == 1:
                 """Add a player to represent a "by"
 
                 Since there is an odd number of players, go is played
@@ -58,7 +58,9 @@ class Division(object):
 
                 player_list.append(Player())
 
-            self.players.add_nodes_from(player_list):
+            player_dict = dict(enumerate(player_list))
+
+            self.players.add_nodes_from(player_list)
             
             for player in self.players:
                 for other_player in self.players:
@@ -85,6 +87,9 @@ class DivisionTest(unittest.TestCase):
         self.assertTrue(len(self.division_graph.nodes()) == len(player_list))
         self.assertTrue(len(self.division_graph.edges()) ==
                         sum(range(len(player_list))))
+
+    def test_start_up(self):
+        a_division = Division(player_list)
 
 if __name__ == "__main__":
     unittest.main()
